@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+.vscode
+.git
+npm-debug.log
+*.log
+temp-*.txt

@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    volumes:
+      - ./.env:/app/.env:ro
+    restart: unless-stopped
+
+  frontend:
+    build: ./BOL-HCI
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
