@@ -34,7 +34,7 @@ export class AppService {
     let transcription = '';
     try {
       transcription = await new Promise<string>((resolve, reject) => {
-        execFile('python', ['-m', 'whisper', tempPath, '--model', 'base', '--language', 'English', '--fp16', 'False', '--output_format', 'txt'], { timeout: 120000 }, (err, stdout, stderr) => {
+        execFile('python', ['-m', 'whisper', tempPath, '--model', 'tiny', '--language', 'English', '--fp16', 'False', '--output_format', 'txt'], { timeout: 120000, env: { ...process.env, OMP_NUM_THREADS: '1', MKL_NUM_THREADS: '1' } }, (err, stdout, stderr) => {
           if (err) return reject(stderr || err.message);
           // Whisper outputs a .txt file with the same base name
           const txtPath = tempPath.replace(/\.webm$/, '.txt');
