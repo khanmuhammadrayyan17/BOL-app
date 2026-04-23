@@ -129,7 +129,8 @@ export default function StoryTime() {
         }
 
         try {
-          const res = await fetch('/backend/voice-check', {
+          const baseUrl = import.meta.env.VITE_API_URL || '/backend';
+          const res = await fetch(`${baseUrl}/voice-check`, {
             method: 'POST',
             body: formData,
           });
